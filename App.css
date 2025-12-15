@@ -1,0 +1,364 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #f8f9fa;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+  background: white;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 450px;
+  background: white;
+  border-right: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-header h2 {
+  font-size: 18px;
+  color: #000000;
+  font-weight: 500;
+}
+
+.add-icon-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  background: white;
+  border-radius: 1px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.add-icon-btn:hover {
+  background: #f0f0f0;
+  border-color: #ccc;
+}
+
+.recipe-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.recipe-item {
+  padding: 16px 20px;
+  cursor: pointer;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.recipe-item:hover {
+  background: #f0f7ff;
+}
+
+.recipe-item.selected {
+  background: #ffffff;
+  color: #000000;
+  font-weight: 600;
+}
+
+.empty-list-placeholder {
+  margin-top: 230px;
+  text-align: center;
+  color: #999;
+}
+
+.add-recipe-bottom {
+  padding: 20px;
+  margin-bottom: 200px;
+}
+
+.add-recipe-btn {
+  width: 40%;
+  margin-left: 120px;
+  padding: 10px;
+  background: #426fdf;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.add-recipe-btn:hover {
+  background: #315bc9;
+}
+
+/* Main Area - Fills entire right side */
+.main {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  background: white;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Placeholder when no recipe is selected */
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  margin-left: -20px;
+  margin-right: 800px;
+}
+
+.placeholder p {
+  font-size: 1px;
+  color: #888;
+  font-weight: 500;
+}
+
+/* Recipe Details - Takes full width AND height of main area */
+.details {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-right: 870px;
+}
+
+.details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.details-header h3 {
+  font-size: 18px;
+  color: #333;
+  margin: 0;
+  margin-bottom: 10px;
+  border-width: 0cap;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Icon buttons - no background or border unless hovered */
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s;
+}
+
+/* Edit button - no grey background */
+.edit-icon:hover {
+  color: #426fdf;
+}
+
+/* Delete button - no grey background */
+.delete-icon:hover {
+  color: #df4242;
+}
+
+/* Only show subtle background on hover */
+.icon-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.details-content {
+  width: 100%;
+  flex: 1;
+}
+
+.details-content h4 {
+  margin: 30px 0 15px;
+  color: #000000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.details-content ul {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.details-content li {
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.details-content p {
+  color: #888;
+  font-style: italic;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background: white;
+  width: 900px;
+  max-width: 90%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+/* Modal Header with Close Button */
+.modal-header {
+  padding: 20px 24px;
+  background: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  padding: 0;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+}
+
+.modal-close-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.modal-body label {
+  display: block;
+  margin: 18px 0 8px;
+  font-weight: 600;
+  color: #000000;
+}
+
+.modal-body input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}
+
+.container-left,
+.container-right {
+  flex: 1;
+}
+
+.modal-body textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.modal-actions {
+  padding: 20px 24px;
+  background: #f9f9f9;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  border-top: 1px solid #eee;
+}
+
+.modal-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.modal-actions button:first-child {
+  background: #ddd;
+  color: #333;
+}
+
+.modal-actions button:first-child:hover {
+  background: #ccc;
+}
+
+.save-btn {
+  background: #426fdf;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #315bc9;
+}
